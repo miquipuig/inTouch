@@ -1,0 +1,18 @@
+db:
+  image: mongo
+  ports:
+    - "27017:27017"
+  command: "--smallfiles --logpath=/dev/null"
+web:
+  build: .
+  command: node .
+  ports:
+    - "3000:3000"
+  links:
+    - db
+  expose:
+      - "3000"
+  environment:
+#     VIRTUAL_HOST: services.makeronboard.com
+     PORT: 3000
+# hostname: services.makeronboard.com

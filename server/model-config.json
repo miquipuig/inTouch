@@ -33,11 +33,19 @@
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "user": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "listing": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "review": {
+    "dataSource": "mongodb",
     "public": true
   }
 }

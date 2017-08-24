@@ -35,8 +35,30 @@ module.exports = function(user) {
   );
 
 
+//proves d'user identificat
+
+  user.log = function(messageId, options) {
+    const Message = this.app.models.Message;
+    // IMPORTANT: forward the options arg
+    return Message.findById(messageId, null, options)
+      .then(msg => {
+        const token = options && options.accessToken;
+        const userId = token && token.userId;
+        const user = userId ? 'user#' + userId : '<anonymous>';
+        console.log('(%s) %s', user, msg.text);
+      });
+  };
+
+  user.remoteMethod(
+    'log', {
+      http: { path: '/log/:messageId', verb: 'get' },
+        accepts: {"arg": "messageId", "type": "number", "required": true},
+        returns: {"arg": "options", "type": "object", "http": "optionsFromRequest"}
+    }
+  );
 
 
+//Alta de 3 usuarios de ejemplo
   user.getExample = function(password, cb) {
        
       user.create([{
@@ -73,7 +95,6 @@ module.exports = function(user) {
       }], cb);
 
   }
-
 
   user.remoteMethod(
     'getExample', {

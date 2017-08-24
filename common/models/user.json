@@ -13,27 +13,47 @@
     "telefono": {
       "type": "string"
     },
-    "intereses" : ["string"],
-    
+    "intereses": {
+      "type": [
+        "string"
+      ]
+    },
     "direccion": {
       "type": "string"
     },
     "identificacion": {
       "type": "string"
+    },
+    "trainer": {
+      "type": "boolean"
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [ {
-  "accessType": "*",
-  "principalType": "ROLE",
-  "principalId": "$everyone",
-  "permission": "DENY"
-}, {
-  "accessType": "READ",
-  "principalType": "ROLE",
-  "principalId": "$everyone",
-  "permission": "ALLOW"
-}],
-  "methods": []
+  "relations": {
+    "reviews": {
+      "type": "hasMany",
+      "model": "review",
+      "foreignKey": "reviewPublisherId"
+    },
+    "listings": {
+      "type": "hasMany",
+      "model": "listing",
+      "foreignKey": "trainerPublisherId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
 }

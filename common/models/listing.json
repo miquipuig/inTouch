@@ -1,0 +1,107 @@
+{
+  "name": "listing",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "fotos": {
+      "type": [
+        "object"
+      ]
+    },
+    "niveles": {
+      "type": [
+        "string"
+      ]
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "descripcion": {
+      "type": "string",
+      "required": true
+    },
+    "precio": {
+      "type": "number",
+      "required": true
+    },
+    "categorias": {
+      "type": [
+        "string"
+      ]
+    },
+    "utilitarios": {
+      "type": [
+        "string"
+      ]
+    },
+    "maxParticipantes": {
+      "type": "number",
+      "required": true
+    },
+    "duracion": {
+      "type": "number"
+    },
+    "localizacion": {
+      "type": "GeoPoint",
+      "required": true
+    },
+    "grupos": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "reviews": {
+      "type": "hasMany",
+      "model": "review",
+      "foreignKey": ""
+    },
+    "reviewers": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": ""
+    },
+    "trainer": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "trainerPublisherId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

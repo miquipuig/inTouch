@@ -26,6 +26,11 @@
     },
     "trainer": {
       "type": "boolean"
+    },
+    "favoriteListings": {
+      "type": [
+        "string"
+      ]
     }
   },
   "validations": [],
@@ -53,6 +58,19 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "addFavoriteListing"
     }
   ],
   "methods": {}

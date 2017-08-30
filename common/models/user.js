@@ -22,7 +22,7 @@ module.exports = function(user) {
         //var response = "id of user is " + id;
       }
       cb(null, response);
-      //console.log(instance);
+    
     });
   }
 
@@ -35,7 +35,7 @@ module.exports = function(user) {
   );
 
 
-//proves d'user identificat
+  //proves d'user identificat
 
   user.log = function(messageId, options) {
     const Message = this.app.models.Message;
@@ -52,47 +52,47 @@ module.exports = function(user) {
   user.remoteMethod(
     'log', {
       http: { path: '/log/:messageId', verb: 'get' },
-        accepts: {"arg": "messageId", "type": "number", "required": true},
-        returns: {"arg": "options", "type": "object", "http": "optionsFromRequest"}
+      accepts: { "arg": "messageId", "type": "number", "required": true },
+      returns: { "arg": "options", "type": "object", "http": "optionsFromRequest" }
     }
   );
 
 
-//Alta de 3 usuarios de ejemplo
+  //Alta de 3 usuarios de ejemplo
   user.getExample = function(password, cb) {
-       
-      user.create([{
-        nombre: "Angela",
-        apellido: "Food",
-        telefono: "+34 956854745",
-        intereses: ["guitar","tennis"],
-        identificacion: "123456789A",
-        direccion: "Calle Bilbao, 3 Barcelona",
-        username: 'foo',
-        email: 'foo@bar.com',
-        password: password
-      }, {
-   
-        nombre: "John",
-        apellido: "Mayer",
-        telefono: "+34 956854745",
-        intereses: ["it","running"],
-        identificacion: "999999999J",
-        direccion: "Calle Paris, 255 Barcelona",
-        username: 'john',
-        email: 'john@doe.com',
-        password: password
-      }, {
-         nombre: "Jane",
-        apellido: "Foster",
-        telefono: "+34 956854745",
-        intereses: ["cooking","singing"],
-        identificacion: "123456789A",
-        direccion: "Calle Balmes, num 666 Barcelona",
-        username: 'jane',
-        email: 'jane@doe.com',
-        password: password
-      }], cb);
+
+    user.create([{
+      nombre: "Angela",
+      apellido: "Food",
+      telefono: "+34 956854745",
+      intereses: ["guitar", "tennis"],
+      identificacion: "123456789A",
+      direccion: "Calle Bilbao, 3 Barcelona",
+      username: 'foo',
+      email: 'foo@bar.com',
+      password: password
+    }, {
+
+      nombre: "John",
+      apellido: "Mayer",
+      telefono: "+34 956854745",
+      intereses: ["it", "running"],
+      identificacion: "999999999J",
+      direccion: "Calle Paris, 255 Barcelona",
+      username: 'john',
+      email: 'john@doe.com',
+      password: password
+    }, {
+      nombre: "Jane",
+      apellido: "Foster",
+      telefono: "+34 956854745",
+      intereses: ["cooking", "singing"],
+      identificacion: "123456789A",
+      direccion: "Calle Balmes, num 666 Barcelona",
+      username: 'jane',
+      email: 'jane@doe.com',
+      password: password
+    }], cb);
 
   }
 
@@ -103,5 +103,108 @@ module.exports = function(user) {
       returns: { type: 'array', root: true }
     }
   );
+
+
+  var LoopBackContext = require('loopback-context');
+  user.addFavoriteListing = function(idListing, cb) {
+    var response = false;
+    var ctx = LoopBackContext.getCurrentContext();
+    var currentUser = ctx && ctx.get('currentUser');
+
+    var favoriteListings = currentUser.favoriteListings;
+
+    if (favoriteListings == null) {
+
+      favoriteListings = [];
+    }
+
+    var index = favoriteListings.indexOf(idListing);
+
+    if (index > -1) {
+      //favoriteListings.splice(index, 1);
+
+      cb(null, "false");
+    }
+    else {
+   
+      favoriteListings.push(idListing);
+
+      user.findById(currentUser.id, function(err, instance) {
+        if (instance != null) {
+          instance.updateAttribute("favoriteListings", favoriteListings, function(err, instance) {
+
+            cb(null, "true");
+          });
+        }
+        else {
+          cb(null, "false");
+        }
+
+      });
+
+    }
+
+  }
+
+  user.remoteMethod(
+    'addFavoriteListing', {
+      http: { path: '/addFavoriteListing', verb: 'get' },
+      accepts: { arg: 'idListing', type: 'string' },
+      returns: { arg: 'response', type: 'boolean' }
+    }
+  );
+
+
+
+  var LoopBackContext = require('loopback-context');
+  user.removeFavoriteListing = function(idListing, cb) {
+    var response = false;
+    var ctx = LoopBackContext.getCurrentContext();
+    var currentUser = ctx && ctx.get('currentUser');
+
+    var favoriteListings = currentUser.favoriteListings;
+
+    if (favoriteListings != null) {
+
+      var index = favoriteListings.indexOf(idListing);
+      if (index > -1) {
+        favoriteListings.splice(index, 1);
+        
+        user.findById(currentUser.id, function(err, instance) {
+          if (instance != null) {
+            instance.updateAttribute("favoriteListings", favoriteListings, function(err, instance) {
+
+              cb(null, "true");
+            });
+          }
+          else {
+            cb(null, "false");
+          }
+
+        });
+
+      }
+      else {
+        cb(null, "false");
+      }
+
+
+    }
+    else {
+      cb(null, "false");
+    }
+
+  }
+
+  user.remoteMethod(
+    'removeFavoriteListing', {
+      http: { path: '/removeFavoriteListing', verb: 'get' },
+      accepts: { arg: 'idListing', type: 'string' },
+      returns: { arg: 'response', type: 'boolean' }
+    }
+  );
+
+
+
 
 };

@@ -178,7 +178,6 @@ module.exports = function(user) {
           }
 
         });
-
       }
       else {
         cb(null, "false");
@@ -187,9 +186,8 @@ module.exports = function(user) {
     else {
       cb(null, "false");
     }
-
   }
-
+  
   user.remoteMethod(
     'removeFavoriteListing', {
       http: { path: '/removeFavoriteListing', verb: 'post' },
@@ -234,5 +232,5 @@ module.exports = function(user) {
       returns: {type: 'array', root: true}
     }
   );
-
 };
+

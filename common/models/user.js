@@ -22,7 +22,7 @@ module.exports = function(user) {
         //var response = "id of user is " + id;
       }
       cb(null, response);
-    
+
     });
   }
 
@@ -107,7 +107,6 @@ module.exports = function(user) {
 
   var LoopBackContext = require('loopback-context');
   user.addFavoriteListing = function(idListing, cb) {
-    var response = false;
     var ctx = LoopBackContext.getCurrentContext();
     var currentUser = ctx && ctx.get('currentUser');
 
@@ -126,7 +125,7 @@ module.exports = function(user) {
       cb(null, "false");
     }
     else {
-   
+
       favoriteListings.push(idListing);
 
       user.findById(currentUser.id, function(err, instance) {
@@ -148,17 +147,14 @@ module.exports = function(user) {
 
   user.remoteMethod(
     'addFavoriteListing', {
-      http: { path: '/addFavoriteListing', verb: 'get' },
+      http: { path: '/addFavoriteListing', verb: 'post' },
       accepts: { arg: 'idListing', type: 'string' },
       returns: { arg: 'response', type: 'boolean' }
     }
   );
 
 
-
-  var LoopBackContext = require('loopback-context');
   user.removeFavoriteListing = function(idListing, cb) {
-    var response = false;
     var ctx = LoopBackContext.getCurrentContext();
     var currentUser = ctx && ctx.get('currentUser');
 
@@ -169,7 +165,7 @@ module.exports = function(user) {
       var index = favoriteListings.indexOf(idListing);
       if (index > -1) {
         favoriteListings.splice(index, 1);
-        
+
         user.findById(currentUser.id, function(err, instance) {
           if (instance != null) {
             instance.updateAttribute("favoriteListings", favoriteListings, function(err, instance) {
@@ -187,8 +183,6 @@ module.exports = function(user) {
       else {
         cb(null, "false");
       }
-
-
     }
     else {
       cb(null, "false");
@@ -198,13 +192,47 @@ module.exports = function(user) {
 
   user.remoteMethod(
     'removeFavoriteListing', {
-      http: { path: '/removeFavoriteListing', verb: 'get' },
+      http: { path: '/removeFavoriteListing', verb: 'post' },
       accepts: { arg: 'idListing', type: 'string' },
       returns: { arg: 'response', type: 'boolean' }
     }
   );
 
+  var app = require('../../server/server');
+  user.getFavoriteListing = function( cb) {
+    var response;
+    var ctx = LoopBackContext.getCurrentContext();
 
 
+    var currentUser = ctx && ctx.get('currentUser');
+
+    if (currentUser != null) {
+
+      var favoriteListings = currentUser.favoriteListings;
+
+      if (favoriteListings != null) {
+
+        var listing = app.models.listing;
+        console.log("Antes de entrar");
+        
+        listing.find(function(err, instance) {
+         
+           cb(null,instance);         
+        });
+      }
+      else {
+        cb(null,[]);
+      }
+    }
+    else {
+      cb(null, []);
+    }
+  }
+  user.remoteMethod(
+    'getFavoriteListing', {
+      http: { path: '/getFavoriteListing', verb: 'get' },
+      returns: {type: 'array', root: true}
+    }
+  );
 
 };

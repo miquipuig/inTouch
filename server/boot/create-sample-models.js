@@ -7,11 +7,12 @@ module.exports = function(app) {
   //create all models
   async.parallel({
     users: async.apply(createUsers),
+    //listings: async.apply(createlistings)
   }, function(err, results) {
     if (err) throw err;
-    /*createReviews(results.reviewers, results.coffeeShops, function(err) {
+    createlistings(results.users, function(err) {
       console.log('> models created sucessfully');
-    });*/
+    });
   });
   //create reviewers
   function createUsers(cb) {
@@ -19,56 +20,94 @@ module.exports = function(app) {
       if (err) return cb(err);
       var user = app.models.user;
       user.create([{
-       nombre: "Angela",
-      apellido: "Food",
-      telefono: "+34 956854745",
-      intereses: ["guitar", "tennis"],
-      identificacion: "123456789A",
-      direccion: "Calle Bilbao, 3 Barcelona",
-      username: 'foo',
-      email: 'foo@bar.com',
-      password: 'intouch',
-      favoriteListings: [4,7,8]
+        nombre: "Angela",
+        apellido: "Food",
+        telefono: "+34 956854745",
+        intereses: ["guitar", "tennis"],
+        identificacion: "123456789A",
+        direccion: "Calle Bilbao, 3 Barcelona",
+        username: 'foo',
+        email: 'foo@bar.com',
+        password: 'intouch',
+        favoriteListings: [4, 7, 8]
       }, {
-         nombre: "John",
-      apellido: "Mayer",
-      telefono: "+34 956854745",
-      intereses: ["it", "running"],
-      identificacion: "999999999J",
-      direccion: "Calle Paris, 255 Barcelona",
-      username: 'john',
-      email: 'john@doe.com',
-      password: 'intouch',
-      favoriteListings: [4,7,8]
+        nombre: "John",
+        apellido: "Mayer",
+        telefono: "+34 956854745",
+        intereses: ["it", "running"],
+        identificacion: "999999999J",
+        direccion: "Calle Paris, 255 Barcelona",
+        username: 'john',
+        email: 'john@doe.com',
+        password: 'intouch',
+        favoriteListings: [4, 7, 8]
       }, {
         nombre: "Jane",
-      apellido: "Foster",
-      telefono: "+34 956854745",
-      intereses: ["cooking", "singing"],
-      identificacion: "123456789A",
-      direccion: "Calle Balmes, num 666 Barcelona",
-      username: 'jane',
-      email: 'jane@doe.com',
-      password: 'intouch'
-      
+        apellido: "Foster",
+        telefono: "+34 956854745",
+        intereses: ["cooking", "singing"],
+        identificacion: "123456789A",
+        direccion: "Calle Balmes, num 666 Barcelona",
+        username: 'jane',
+        email: 'jane@doe.com',
+        password: 'intouch'
+
       }], cb);
     });
   }
   //create Listings
-  function createlistings(cb) {
-    mongodb.automigrate('CoffeeShop', function(err) {
+  function createlistings(users, cb) {
+    mongodb.automigrate('listing', function(err) {
       if (err) return cb(err);
-      var CoffeeShop = app.models.listings;
-      CoffeeShop.create([{
-        name: 'Bel Cafe',
-        city: 'Vancouver'
+      var listing = app.models.listing;
+      var DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
+      listing.create([{
+        date: Date.now() - (DAY_IN_MILLISECONDS * 4),
+        niveles: [
+          "a", "b"
+        ],
+        nombre: "Aprende guitarra en Poblenou",
+        descripcion: "El mejor maestro de guitarra tiene la solución",
+        precio: 0,
+        categorias: [
+          "a"
+        ],
+        utilitarios: [
+          "a"
+        ],
+        maxParticipantes: 10,
+        duracion: 40,
+        localizacion: {
+          "lat": 0,
+          "lng": 0
+        },
+        grupos: true,
+        trainerPublisherId: users[2].id
+
       }, {
-        name: 'Three Bees Coffee House',
-        city: 'San Mateo'
-      }, {
-        name: 'Caffe Artigiano',
-        city: 'Vancouver'
-      }, ], cb);
+        date: Date.now() - (DAY_IN_MILLISECONDS * 3),
+        niveles: [
+          "a", "b"
+        ],
+        nombre: "Clase de swing",
+        descripcion: "El mejor maestro de guitarra tiene la solución",
+        precio: 0,
+        categorias: [
+          "a"
+        ],
+        utilitarios: [
+          "a"
+        ],
+        maxParticipantes: 10,
+        duracion: 40,
+        localizacion: {
+          "lat": 0,
+          "lng": 0
+        },
+        grupos: true,
+        trainerPublisherId: users[1].id
+
+      }], cb);
     });
   }
   //create reviews

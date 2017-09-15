@@ -47,5 +47,9 @@
   "review": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "announcement": {
+    "dataSource": "db",
+    "public": true
   }
 }

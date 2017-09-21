@@ -8,7 +8,7 @@
   "properties": {
     "date": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "fotos": {
       "type": [
@@ -62,7 +62,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "listing": {
+      "type": "belongsTo",
+      "model": "listing",
+      "foreignKey": ""
+    }
+  },
   "acls": [
     {
       "accessType": "*",

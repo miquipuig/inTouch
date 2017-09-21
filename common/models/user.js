@@ -211,7 +211,7 @@ module.exports = function(user) {
       if (favoriteListings != null) {
 
         var listing = app.models.listing;
-        console.log("Antes de entrar");
+      
         
         listing.find(function(err, instance) {
          

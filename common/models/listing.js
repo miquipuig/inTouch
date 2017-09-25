@@ -14,7 +14,7 @@ module.exports = function(listing) {
 
   var app = require('../../server/server');
   listing.beforeRemote("prototype.__create__announcements", function(context, listing, next) {
-  
+
     context.args.data.date = Date.now();
     context.args.data.trainerPublisherId = context.req.accessToken.userId;
     var listings = app.models.listing;

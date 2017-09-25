@@ -1,6 +1,6 @@
 {
-  "name": "announcement",
-  "base": "PersistedModel",
+  "name": "reservation",
+ "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -63,23 +63,20 @@
   },
   "validations": [],
   "relations": {
-    "trainer": {
+     "announcement": {
+      "type": "belongsTo",
+      "model": "announcement",
+      "foreignKey": ""
+    },
+     "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "trainerPublisherId"
-    },
-    "listing": {
-      "type": "belongsTo",
-      "model": "listing",
-      "foreignKey": ""
-    },
-    "reservations": {
-      "type": "hasMany",
-      "model": "reservation",
-      "foreignKey": ""
+      "foreignKey": "userReservationId"
     }
-  },
-  "acls": [{
+    },
+  "acls": [
+    
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
@@ -104,6 +101,6 @@
       "principalId": "$owner",
       "permission": "ALLOW"
     }
-  ],
+    ],
   "methods": {}
 }

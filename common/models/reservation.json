@@ -1,6 +1,6 @@
 {
   "name": "reservation",
- "base": "PersistedModel",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -63,19 +63,18 @@
   },
   "validations": [],
   "relations": {
-     "announcement": {
+    "announcement": {
       "type": "belongsTo",
       "model": "announcement",
       "foreignKey": ""
     },
-     "user": {
+    "user": {
       "type": "belongsTo",
       "model": "user",
       "foreignKey": "userReservationId"
     }
-    },
+  },
   "acls": [
-    
     {
       "accessType": "*",
       "principalType": "ROLE",
@@ -101,6 +100,6 @@
       "principalId": "$owner",
       "permission": "ALLOW"
     }
-    ],
+  ],
   "methods": {}
 }

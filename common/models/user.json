@@ -50,13 +50,11 @@
       "model": "announcement",
       "foreignKey": "trainerPublisherId"
     },
-     "reservations": {
+    "reservations": {
       "type": "hasMany",
       "model": "reservation",
       "foreignKey": "userReservationId"
     }
-    
-    
   },
   "acls": [
     {

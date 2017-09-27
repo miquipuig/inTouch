@@ -55,5 +55,9 @@
   "reservation": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "container": {
+    "dataSource": "filesystemContainer",
+    "public": true
   }
 }

@@ -31,6 +31,10 @@ module.exports = function(listing) {
       context.args.data.localizacion = instance.localizacion;
       context.args.data.grupos = instance.grupos;
 
+      if (!(context.args.data.precio > 0)) {
+        context.args.data.precio = instance.precio;
+      }
+
       next();
     });
 

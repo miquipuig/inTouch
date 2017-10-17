@@ -22,9 +22,6 @@ module.exports = function(announcement) {
 
     announcements.findById(context.req.params.id, function(err, instance) {
 
-      console.log(instance);
-
-      console.log(err);
       context.args.data.nombre = instance.nombre;
       context.args.data.niveles = instance.niveles;
       context.args.data.descripcion = instance.descripcion;
@@ -35,7 +32,8 @@ module.exports = function(announcement) {
       context.args.data.localizacion = instance.localizacion;
       context.args.data.grupos = instance.grupos;
       context.args.data.precio = instance.precio;
-
+      context.args.data.trainerPublisherId = instance.trainerPublisherId;
+      
       next();
     });
 

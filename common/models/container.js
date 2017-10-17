@@ -6,6 +6,8 @@ module.exports = function(Container) {
 
     Container.afterRemote('upload', function(ctx, res, next) {
 
+        console.log(res.result.files);
+        //res.result.files
         var file = res.result.files.file[0];
         var file_path = "./server/storage/" + file.container + "/" + file.name;
         var file_thumb_path = "./server/storage/" + file.container + "/thumb/" + file.name;

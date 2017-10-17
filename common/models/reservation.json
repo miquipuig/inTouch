@@ -59,7 +59,12 @@
     },
     "trainerEmail": {
       "type": "string"
+    },
+    "trainerPublisherId": {
+      "type": "string",
+      "required": true
     }
+
   },
   "validations": [],
   "relations": {
@@ -74,8 +79,7 @@
       "foreignKey": "userReservationId"
     }
   },
-  "acls": [
-    {
+  "acls": [{
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",

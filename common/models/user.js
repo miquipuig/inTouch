@@ -9,7 +9,6 @@ module.exports = function(user) {
   }
 
 
-
   user.getByName = function(username, cb) {
 
 
@@ -200,21 +199,14 @@ module.exports = function(user) {
   user.getFavoriteListing = function( cb) {
     var response;
     var ctx = LoopBackContext.getCurrentContext();
-
-
     var currentUser = ctx && ctx.get('currentUser');
 
     if (currentUser != null) {
-
       var favoriteListings = currentUser.favoriteListings;
-
       if (favoriteListings != null) {
-
         var listing = app.models.listing;
-      
         
-        listing.find(function(err, instance) {
-         
+        listing.find(function(err, instance) {   
            cb(null,instance);         
         });
       }

@@ -1,44 +1,36 @@
 {
-  "name": "chat",
+  "name": "chatMessage",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "date": {
+     "date": {
       "type": "date",
       "required": true
     },
-    "titulo": {
-      "type": "string"
-    },
-    "trainerName": {
-      "type": "string"
-    },
-    "clientName": {
-      "type": "string"
+    "text": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "client": {
+    "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "clientChatId"
+      "foreignKey": "userMessageId"
     },
-    "trainer": {
+    "chat": {
       "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "trainerChatId"
-    },
-    "messages": {
-      "type": "hasMany",
-      "model": "chatMessage",
+      "model": "chat",
       "foreignKey": "chatId"
     }
   },
-  "acls": [{
+  "acls": [
+
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",

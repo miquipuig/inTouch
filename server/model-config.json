@@ -63,5 +63,9 @@
   "chat": {
     "dataSource": "db",
     "public": true
+  },
+  "chatMessage": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -1,0 +1,70 @@
+{
+  "name": "chat",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "titulo": {
+      "type": "string"
+    },
+    "trainerName": {
+      "type": "string"
+    },
+    "clientName": {
+      "type": "string"
+    },
+    "idtrainer": {
+      "type": "string",
+      "required": true
+    },
+    "idcustomer": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "client": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "clientChatId"
+    },
+    "trainer": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "trainerChatId"
+    }
+  },
+  "acls": [
+
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+
+  ],
+  "methods": {}
+}

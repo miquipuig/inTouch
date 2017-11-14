@@ -54,10 +54,19 @@
       "type": "hasMany",
       "model": "reservation",
       "foreignKey": "userReservationId"
+    },
+    "chatclient": {
+      "type": "hasMany",
+      "model": "chat",
+      "foreignKey": "clientChatId"
+    },
+    "chattrainer": {
+      "type": "hasMany",
+      "model": "chat",
+      "foreignKey": "trainerChatId"
     }
   },
-  "acls": [
-    {
+  "acls": [{
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",

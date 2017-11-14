@@ -59,5 +59,9 @@
   "container": {
     "dataSource": "filesystemContainer",
     "public": true
+  },
+  "chat": {
+    "dataSource": "db",
+    "public": true
   }
 }

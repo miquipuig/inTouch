@@ -10,20 +10,21 @@ module.exports = function(Chat) {
 
     var users = app.models.user;
     //**** Mejora possible: esto es mejorable para no que tener que entrar siembpre en el findId
+    //*** se ha de realizar un control para ver que el id del trainer es correcto
     users.findById(context.args.data.trainerChatId, function(err, instance) {
-    
-      if (context.args.data.trainerName == null && instance.nombre != null ) {
+      
+      
+      if (context.args.data.trainerName == null && instance != null ) {
         context.args.data.trainerName = instance.nombre;
       }
 
       users.findById(context.req.accessToken.userId, function(err, instance ) {
        
-        if (context.args.data.clientName == null && instance.nombre != null) {
+        if (context.args.data.clientName == null && instance != null) {
           context.args.data.clientName = instance.nombre;;
         }
         next();
       });
-
 
     });
   });

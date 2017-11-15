@@ -9,15 +9,16 @@ module.exports = function(Chat) {
     
 
     var users = app.models.user;
+    //**** Mejora possible: esto es mejorable para no que tener que entrar siembpre en el findId
     users.findById(context.args.data.trainerChatId, function(err, instance) {
- 
-      if (context.args.data.trainerName == null) {
+    
+      if (context.args.data.trainerName == null && instance.nombre != null ) {
         context.args.data.trainerName = instance.nombre;
       }
 
-      users.findById(context.req.accessToken.userId, function(err, instance) {
+      users.findById(context.req.accessToken.userId, function(err, instance ) {
        
-        if (context.args.data.clientName == null) {
+        if (context.args.data.clientName == null && instance.nombre != null) {
           context.args.data.clientName = instance.nombre;;
         }
         next();

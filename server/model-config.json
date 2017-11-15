@@ -61,11 +61,11 @@
     "public": true
   },
   "chat": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "chatMessage": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   }
 }

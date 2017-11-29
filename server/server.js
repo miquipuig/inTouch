@@ -4,6 +4,7 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 var LoopBackContext = require('loopback-context');
 var app = module.exports = loopback();
+boot(app, __dirname);
 
 app.start = function() {
   // start the web server
@@ -18,17 +19,38 @@ app.start = function() {
   });
 };
 
-// Bootstrap the application, configure models, datasources and middleware.
-// Sub-apps like REST API are mounted via boot scripts.
-boot(app, __dirname, function(err) {
-  if (err) throw err;
+if (require.main === module) {
+  //Comment this app.start line and add following lines
+  //app.start();
+  app.io = require('socket.io')(app.start());
+  require('socketio-auth')(app.io, {
+    authenticate: function (socket, value, callback) {    
+        console.log(value);
+        var AccessToken = app.models.AccessToken;
+        
+        //get credentials sent by the client
+        var token = AccessToken.find({
+          where:{id: value.id}
+        }, function(err, tokenDetail){
+          if (err) throw err;
+          if(tokenDetail.length){
+            callback(null, true);
+            console.log("premio");
+          } else {
+            callback(null, true);
+          }
+        }); 
+      } 
+  });
 
-  // start the server if `$ node server.js`
-  if (require.main === module)
-    app.start();
-});
+  app.io.on('connection', function(socket){
+    console.log('a user connected');
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+  });
+}
 
-//añadir usuario y token en el contexto
 
 app.use(LoopBackContext.perRequest());
 app.use(loopback.token());

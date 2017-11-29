@@ -1,0 +1,21 @@
+{
+  "name": "accessToken",
+  "plural": "accessTokens",
+  "base": "AccessToken",
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "userId"
+    }
+  },
+ "acls": [  {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }],
+  "methods": []
+}

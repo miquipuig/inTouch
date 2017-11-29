@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Intouch Socket.IO chat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font: 13px Helvetica, Arial;
+    }
+
+    #primer {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 50px;
+      width: 100%;
+    }
+
+    #primer input {
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      margin-right: .5%;
+    }
+
+    #primer button {
+      width: 9%;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+    }
+
+    #segon {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    #segon input {
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      margin-right: .5%;
+    }
+
+    #segon button {
+      width: 9%;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+    }
+
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #messages li {
+      padding: 5px 10px;
+    }
+
+    #messages li:nth-child(odd) {
+      background: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="messages"></ul>
+  <form method="GET" id="primer" action="">
+    <input type="text" id="id" name="id" autocomplete="off" /><button>Conectar</button>
+  </form>
+  <form id="segon" action="">
+    <input id="m" autocomplete="off" /><button>Enviar mensaje</button>
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    //recuperar parámetros
+    var paramstr = window.location.search.substr(1);
+    var paramarr = paramstr.split("&");
+    var params = {};
+
+    for (var i = 0; i < paramarr.length; i++) {
+      var tmparr = paramarr[i].split("=");
+      params[tmparr[0]] = tmparr[1];
+    }
+
+    $('#id').val(params['id']);
+    var socket = io();
+    $('#segon').submit(function() {
+      
+      
+    });
+
+    socket.on('connect', function() {
+      $('#messages').append($('<li>').text("Intento conectarme"));
+      socket.emit('authentication', { id: params['id'] });
+
+      socket.on('authenticated', function() {
+        // use the socket as usual
+        $('#messages').append($('<li>').text("Autentificado"));
+      });
+
+    });
+  </script>
+</body>
+
+</html>

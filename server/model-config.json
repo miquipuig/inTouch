@@ -17,10 +17,7 @@
     "dataSource": "mongodb",
     "public": false
   },
-  "AccessToken": {
-    "dataSource": "mongodb",
-    "public": false
-  },
+ 
   "ACL": {
     "dataSource": "mongodb",
     "public": false
@@ -67,5 +64,17 @@
   "chatMessage": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "AccessToken": {
+    "dataSource": "mongodb",
+    "public": true,
+    "acls": [  {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }]
   }
+
+
 }

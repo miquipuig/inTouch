@@ -67,7 +67,7 @@
   },
   "accessToken": {
     "dataSource": "mongodb",
-    "public": true,
+    "public": false,
     "acls": [  {
       "accessType": "READ",
       "principalType": "ROLE",
@@ -77,7 +77,7 @@
   },
    "AccessToken": {
     "dataSource": "mongodb",
-    "public": true,
+    "public": false,
     "acls": [  {
       "accessType": "READ",
       "principalType": "ROLE",

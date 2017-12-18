@@ -65,7 +65,17 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "AccessToken": {
+  "accessToken": {
+    "dataSource": "mongodb",
+    "public": true,
+    "acls": [  {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }]
+  },
+   "AccessToken": {
     "dataSource": "mongodb",
     "public": true,
     "acls": [  {

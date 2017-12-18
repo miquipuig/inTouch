@@ -19,37 +19,78 @@ app.start = function() {
   });
 };
 
+//Autentificació de sockets
+//-----------------------------------------------------------
 if (require.main === module) {
   //Comment this app.start line and add following lines
   //app.start();
   app.io = require('socket.io')(app.start());
+
+  var clients = [];
   require('socketio-auth')(app.io, {
-    authenticate: function (socket, value, callback) {    
-        console.log(value);
-        var AccessToken = app.models.AccessToken;
-        
-        //get credentials sent by the client
-        var token = AccessToken.find({
-          where:{id: value.id}
-        }, function(err, tokenDetail){
+    authenticate: function(socket, value, callback) {
+
+      var AccessToken = app.models.accessToken;
+
+      //get credentials sent by the client
+      if (value.id != null) {
+        var token = AccessToken.findById(value.id, function(err, tokenDetail) {
           if (err) throw err;
-          if(tokenDetail.length){
-            callback(null, true);
-            console.log("premio");
-          } else {
-            callback(null, true);
+          if (tokenDetail != null) {
+
+
+            /* console.log("premio");
+             console.log(socket.id);
+             console.log(tokenDetail);
+             console.log(tokenDetail.userId);*/
+
+            if (tokenDetail != null) {
+              tokenDetail.updateAttribute("socketid", socket.id, function(err, instance) {
+
+                callback(null, "true");
+              });
+            }
+            else {
+              callback(null, "false");
+            }
+
           }
-        }); 
-      } 
+          else {
+            callback(null, false);
+          }
+        });
+      }
+    }
   });
 
-  app.io.on('connection', function(socket){
-    console.log('a user connected');
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
+
+  app.io.on('connection', function(socket) {
+
+    //app.io.emit('chat message', "Des del server: Un usuario connectandose");
+    clients.push(socket.id);
+    socket.on('disconnect', function() {
+
     });
+
+    socket.on('chat message', function(msg) {
+      //console.log('message: ' + msg);
+      //A tots
+      //app.io.emit('chat message', msg);
+      //Solo a uno
+      //socket.emit('chat message', msg);
+      //app.io.sockets.connected[socket.id].emit('chat message',"He enviado un mensaje al resto del mundo");
+    });
+
   });
 }
+//-----------------------------------------------------------
+//Fi de l'Autentificació de sockets
+
+
+//multiple nodes
+//https://socket.io/docs/using-multiple-nodes/#nginx-configuration
+
+
 
 
 app.use(LoopBackContext.perRequest());

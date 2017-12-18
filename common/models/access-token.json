@@ -2,7 +2,11 @@
   "name": "accessToken",
   "plural": "accessTokens",
   "base": "AccessToken",
-  "properties": {},
+  "properties": {
+     "socketid": {
+      "type": "string"
+    }
+    },
   "validations": [],
   "relations": {
     "user": {

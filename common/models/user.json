@@ -35,6 +35,11 @@
   },
   "validations": [],
   "relations": {
+     "accessTokens": {
+      "type": "hasMany",
+      "model": "accessToken",
+      "foreignKey": "userId"
+    },
     "reviews": {
       "type": "hasMany",
       "model": "review",

@@ -4,7 +4,7 @@ db:
     - "27017:27017"
   command: "--smallfiles --logpath=/dev/null"
 web:
-  build: web/Dockerfile
+  build: web/
   command: node .
   ports:
     - "80:3000"

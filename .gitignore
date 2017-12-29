@@ -16,5 +16,6 @@
 .strong-pm
 coverage
 node_modules
+web/node_modules
 npm-debug.log
-server/boot/create-sample-models.js
+web/server/boot/create-sample-models.js

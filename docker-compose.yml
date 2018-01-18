@@ -3,42 +3,16 @@ db:
   ports:
     - "27017:27017"
   command: "--smallfiles --logpath=/dev/null"
-web1:
+web:
   build: ./web
   command: node .
   ports:
-    - "3000"
+    - "80:3000"
   links:
     - db
-web2:
-  build: ./web
-  command: node .
-  ports:
-    - "3000"
-  links:
-    - db
-    
-web3:
-  build: ./web
-  command: node .
-  ports:
-    - "3000"
-  links:
-    - db    
-
-
-#  expose:
-#      - "3000"
-#  environment:
+  expose:
+      - "3000"
+  environment:
 #     VIRTUAL_HOST: services.makeronboard.com
-#     PORT: 3000
+     PORT: 3000
 # hostname: services.makeronboard.com
-
-nginx:
-    build: ./nginx
-    links:
-        - web1:node1
-        - web2:node2
-        - web3:node3
-    ports:
-        - "80:80"

@@ -54,9 +54,6 @@
       "type": "number",
       "required": true
     },
-    "duracion": {
-      "type": "number"
-    },
     "localizacion": {
       "type": "GeoPoint",
       "required": true

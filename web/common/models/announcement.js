@@ -28,12 +28,11 @@ module.exports = function(announcement) {
       context.args.data.categorias = instance.categorias;
       context.args.data.utilitarios = instance.utilitarios;
       context.args.data.maxParticipantes = instance.maxParticipantes;
-      context.args.data.duracion = instance.duracion;
       context.args.data.localizacion = instance.localizacion;
       context.args.data.grupos = instance.grupos;
       context.args.data.precio = instance.precio;
       context.args.data.inicio = instance.inicio;
-       context.args.data.duracion = instance.duracion;
+      context.args.data.duracion = instance.duracion;
       
       next();
     });

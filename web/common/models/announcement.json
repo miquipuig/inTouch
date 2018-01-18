@@ -10,6 +10,15 @@
       "type": "date",
       "required": false
     },
+    "horaInicio": {
+      "type": "date",
+      "required": false
+    },
+    "duracion": {
+      "type": "number",
+      "required": false
+    },
+    
     "fotos": {
       "type": [
         "object"

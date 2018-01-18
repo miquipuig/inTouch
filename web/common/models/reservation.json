@@ -10,7 +10,7 @@
       "type": "date",
       "required": false
     },
-    "horaInicio": {
+    "inicio": {
       "type": "date",
       "required": false
     },

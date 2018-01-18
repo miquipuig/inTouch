@@ -32,7 +32,7 @@ module.exports = function(announcement) {
       context.args.data.localizacion = instance.localizacion;
       context.args.data.grupos = instance.grupos;
       context.args.data.precio = instance.precio;
-      context.args.data.horaInicio = instance.horaInicio;
+      context.args.data.inicio = instance.inicio;
        context.args.data.duracion = instance.duracion;
       
       next();

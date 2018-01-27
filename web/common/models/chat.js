@@ -38,11 +38,11 @@ module.exports = function(Chat) {
     var tokens = app.models.accessToken;
     var idcliente = "";
     //app.io.emit('chat message', "Entro en servicio");
-    //console.log("coses AAAAA enviades");
+    console.log("coses AAAAA enviades");
     chat.findById(context.req.params.id, function(err, instance) {
-
+    
       if (instance != null) {
-
+      console.log("Primer pas:",instance.clientChatId);
         if (instance.clientChatId == context.req.accessToken.userId) {
           idcliente = instance.trainerChatId;
         }
@@ -51,12 +51,12 @@ module.exports = function(Chat) {
         }
 
         if (idcliente != "") {
-
+            console.log("Me pasas un idcliente:",idcliente);
           tokens.findOne({ where: { userId: idcliente } }, function(err, instance) {
 
             if (instance != null) {
               console.log("El socket al que envio es:", instance);
-              console.log("El el userId:", idcliente, instance.socketid);
+              console.log("El  userId:", idcliente, instance.socketid);
               app.io.sockets.connected[instance.socketid].emit('chat message', '{"chatId": "' + context.req.params.id + '","userId": "' + idcliente + '","text":"' + context.args.data.text + '"}');
             }
             next();

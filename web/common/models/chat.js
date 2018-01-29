@@ -44,16 +44,17 @@ module.exports = function(Chat) {
       if (instance != null) {
       console.log("Primer pas:",instance.clientChatId);
       console.log("context.req.accessToken.userId",context.req.accessToken.userId);
-      console.log("instance.clientChatId:",instance.clientChatI);
+      console.log("instance.clientChatId:",instance.clientChatId);
       console.log("instance.trainerChatId:",instance.trainerChatId);
       
-        if (instance.clientChatId == context.req.accessToken.userId) {
+        if (instance.clientChatId.equals(context.req.accessToken.userId)) {
+          
           idcliente = instance.trainerChatId;
         }
-        else if (instance.trainerChatId == context.req.accessToken.userId) {
+        else if (instance.trainerChatId.equals(context.req.accessToken.userId)) {
           idcliente = instance.clientChatId;
         }
-
+        
         if (idcliente != "") {
             console.log("Me pasas un idcliente:",idcliente);
           tokens.findOne({ where: { userId: idcliente } }, function(err, instance) {

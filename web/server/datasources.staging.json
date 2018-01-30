@@ -3,7 +3,7 @@
   "mongodb": {
     "host": "db",
     "port": 27017,
-    "database": "Loc8r",
+    "database": "intouch",
     "password": "",
     "name": "mongodb",
     "user": "root",

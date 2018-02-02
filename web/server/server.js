@@ -33,22 +33,20 @@ if (require.main === module) {
     authenticate: function(socket, value, callback) {
 
       var AccessToken = app.models.accessToken;
-
+          console.log("Intento de connexión");
       //get credentials sent by the client
       if (value.id != null) {
+          console.log("Token enviado");
         var token = AccessToken.findById(value.id, function(err, tokenDetail) {
           if (err) throw err;
           if (tokenDetail != null) {
 
-
-            /* console.log("premio");
-             console.log(socket.id);
-             console.log(tokenDetail);
-             console.log(tokenDetail.userId);*/
+              
+            
 
             if (tokenDetail != null) {
               tokenDetail.updateAttribute("socketid", socket.id, function(err, instance) {
-
+                 console.log("Token correcto. Usuario logado");
                 callback(null, "true");
               });
             }

@@ -56,14 +56,20 @@ module.exports = function(Chat) {
         }
         
         if (idcliente != "") {
-            console.log("Me pasas un idcliente:",idcliente);
-          tokens.findOne({ where: { userId: idcliente } }, function(err, instance) {
+            console.log("Me pasas un idcliente:", idcliente);
+          tokens.findOne({ where: { userId: idcliente },       
+                           order: "created DESC"
+                          }, function(err, instance) {
 
             if (instance != null) {
               if(instance.socketid!=null){
                 console.log("El socket al que envio es:", instance);
                 console.log("El  userId:", idcliente, instance.socketid);
+                try{
                 app.io.sockets.connected[instance.socketid].emit('chat message', '{"chatId": "' + context.req.params.id + '","userId": "' + idcliente + '","text":"' + context.args.data.text + '"}');
+                }catch(error) {
+                    console.log(error);
+                }
               }
             }
             next();

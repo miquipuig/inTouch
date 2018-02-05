@@ -46,7 +46,7 @@ if (require.main === module) {
 
             if (tokenDetail != null) {
               tokenDetail.updateAttribute("socketid", socket.id, function(err, instance) {
-                 console.log("Token correcto. Usuario logado");
+                 console.log("Token correcto. Usuario logado. grabado en el token el detalle de la conexion socket");
                 callback(null, "true");
               });
             }

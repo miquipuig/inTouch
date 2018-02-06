@@ -5,7 +5,7 @@ var boot = require('loopback-boot');
 var LoopBackContext = require('loopback-context');
 var app = module.exports = loopback();
 var os = require('os');
-
+require('console-stamp')(console, '[HH:MM:ss]');
 boot(app, __dirname);
 
 app.start = function() {

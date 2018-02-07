@@ -1,0 +1,1 @@
+curl -i -H Authorization: Oauth 27HXJS4pI9buSGq3DAiTTyzaEXJPN1JOoJ4q1VFilyx8T9HhNZ89M2wbwUbi71Kg -F fileupload=@/home/ubuntu/workspace/proves/calvin.jpg -X POST http://52.15.171.179/api/containers/nou/upload

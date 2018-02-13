@@ -26,7 +26,7 @@
     "quickthumb": "0.0.12",
     "redis": "^2.8.0",
     "serve-favicon": "^2.0.1",
-    "socket.io": "<=1.7.x",
+    "socket.io": "<=1.5.x",
     "socketio-auth": "^0.1.0",
     "strong-error-handler": "^2.0.0"
   },

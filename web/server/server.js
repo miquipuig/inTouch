@@ -41,9 +41,6 @@ if (require.main === module) {
           if (err) throw err;
           if (tokenDetail != null) {
 
-              
-            
-
             if (tokenDetail != null) {
               tokenDetail.updateAttribute("socketid", socket.id, function(err, instance) {
                  console.log("Token correcto. Usuario logado. grabado en el token el detalle de la conexion socket");
@@ -84,7 +81,7 @@ if (require.main === module) {
   });
 }
 //-----------------------------------------------------------
-//Fi de l'Autentificació de sockets
+//Fin de la Autentificación de sockets
 
 
 //multiple nodes

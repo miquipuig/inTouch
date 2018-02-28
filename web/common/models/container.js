@@ -6,25 +6,25 @@ module.exports = function(Container) {
 
     Container.afterRemote('upload', function(ctx, res, next) {
 
-        console.log(res.result.files);
+        //console.log(res.result.files);
         res.result.files
         
         var file = res.result.files.fileupload[0];
-        console.log(file);
+        //console.log(file);
         var file_path = "./server/storage/" + file.container + "/" + file.name;
-        console.log("Aqui");
-        console.log(file_path);
+        //console.log("Aqui");
+        //console.log(file_path);
         var file_thumb_path = "./server/storage/" + file.container + "/thumb/" + file.name;
 
-        qt.convert({
+        /*qt.convert({
             src: file_path,
             dst: file_thumb_path,
-            width: 200
+            width: 100
         }, function (err, path) {
-console.log(err);
-        });
-
+           
+        });*/
         next();
+       
     });
 
 };

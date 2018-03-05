@@ -22,5 +22,5 @@ module.exports = function(app) {
     }
   });
   var container = ds.createModel('container');
-  app.model(container);
+  //app.model(container);
 };

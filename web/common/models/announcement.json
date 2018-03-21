@@ -18,7 +18,6 @@
       "type": "number",
       "required": false
     },
-    
     "fotos": {
       "type": [
         "object"

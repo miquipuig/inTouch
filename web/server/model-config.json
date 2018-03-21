@@ -14,43 +14,42 @@
     ]
   },
   "User": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": false
   },
- 
   "ACL": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": false
   },
   "user": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "listing": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "review": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "announcement": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "reservation": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "container": {
@@ -58,33 +57,35 @@
     "public": true
   },
   "chat": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "chatMessage": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": true
   },
   "accessToken": {
-    "dataSource": "mongodb",
+    "dataSource": "mysqldev",
     "public": false,
-    "acls": [  {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    }]
+    "acls": [
+      {
+        "accessType": "READ",
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW"
+      }
+    ]
   },
-   "AccessToken": {
-    "dataSource": "mongodb",
+  "AccessToken": {
+    "dataSource": "mysqldev",
     "public": false,
-    "acls": [  {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    }]
+    "acls": [
+      {
+        "accessType": "READ",
+        "principalType": "ROLE",
+        "principalId": "$everyone",
+        "permission": "ALLOW"
+      }
+    ]
   }
-
-
 }

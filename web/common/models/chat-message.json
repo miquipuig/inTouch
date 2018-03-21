@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "properties": {
-     "date": {
+    "date": {
       "type": "date",
       "required": true
     },
@@ -29,7 +29,6 @@
     }
   },
   "acls": [
-
     {
       "accessType": "*",
       "principalType": "ROLE",

@@ -3,10 +3,10 @@
   "plural": "accessTokens",
   "base": "AccessToken",
   "properties": {
-     "socketid": {
+    "socketid": {
       "type": "string"
     }
-    },
+  },
   "validations": [],
   "relations": {
     "user": {
@@ -15,11 +15,13 @@
       "foreignKey": "userId"
     }
   },
- "acls": [  {
+  "acls": [
+    {
       "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW"
-    }],
-  "methods": []
+    }
+  ],
+  "methods": {}
 }

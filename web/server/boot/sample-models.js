@@ -2,7 +2,7 @@
 var async = require('async');
 module.exports = function(app) {
   //data sources
-  var mongodb = app.dataSources.mongodb; // 'name' of your mongo connector, you can find it in datasource.json
+  var mysqldev = app.dataSources.mysqldev; // 'name' of your mongo connector, you can find it in datasource.json
 
   //create all models
   async.parallel({
@@ -16,7 +16,7 @@ module.exports = function(app) {
   });
   //create reviewers
   function createUsers(cb) {
-    mongodb.automigrate('user', function(err) {
+    mysqldev.automigrate('user', function(err) {
       if (err) return cb(err);
       var user = app.models.user;
       user.create([{
@@ -57,7 +57,7 @@ module.exports = function(app) {
   }
   //create Listings
   function createlistings(users, cb) {
-    mongodb.automigrate('listing', function(err) {
+    mysqldev.automigrate('listing', function(err) {
       if (err) return cb(err);
       var listing = app.models.listing;
       var DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
@@ -112,7 +112,7 @@ module.exports = function(app) {
   }
   //create reviews
   function createReviews(reviewers, coffeeShops, cb) {
-    mongodb.automigrate('Review', function(err) {
+    mysqldev.automigrate('Review', function(err) {
       if (err) return cb(err);
       var Review = app.models.Review;
       var DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;

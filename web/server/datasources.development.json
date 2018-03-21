@@ -14,6 +14,18 @@
     "connector": "loopback-component-storage",
     "provider": "filesystem",
     "root": "./storage"
+  },
+  
+    "mysqldev": {
+    "host": "trainer.cd9ojg2uhja1.us-east-2.rds.amazonaws.com",
+    "port": 3306,
+    "url": "",
+    "database": "tutrainerDev",
+    "password": "intouch22",
+    "name": "mysqldev",
+    "user": "admin",
+    "connector": "mysql"
   }
+  
 
 }

@@ -20,7 +20,7 @@
     "host": "trainer.cd9ojg2uhja1.us-east-2.rds.amazonaws.com",
     "port": 3306,
     "url": "",
-    "database": "tutrainerDev",
+    "database": "tutrainerDEV",
     "password": "intouch22",
     "name": "mysqldev",
     "user": "admin",

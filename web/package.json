@@ -35,6 +35,8 @@
   "devDependencies": {
     "eslint": "^3.17.1",
     "eslint-config-loopback": "^8.0.0",
+    "grunt": "^1.0.2",
+    "grunt-loopback-auto": "0.0.5",
     "nsp": "^2.1.0"
   },
   "repository": {

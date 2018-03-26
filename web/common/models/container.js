@@ -1,32 +1,43 @@
 'use strict';
 
-module.exports = function(Container) {
+module.exports = function(Storage) {
 
-    //var qt = require('quickthumb');
+  Storage.afterRemote('upload', function(ctx, data, next) {
+    var newName = "";
+    
+    try {
+      newName=ctx.req.accessToken.userId;    
+    }
+    catch (error) {
+      console.error(error);
+    } 
+    console.log(data.result.files);
+    const container = data.result.files.fileupload[0].container;
+    const oldname = data.result.files.fileupload[0].name;
 
-    Container.afterRemote('upload', function(ctx, res, next) {
+    //const container = data.result.files.file[0];
 
-        //console.log(res.result.files);
-                
-        //res.result.files.fileupload[0]="aaa.jpg";
-        //console.log(res.result.files);
-        //console.log(res.result.files.fileupload[0]);
-        /*
-        console.log(file);
-        var file_path = "./server/storage/" + file.container + "/" + file.name;
-        console.log("Aqui");
-        console.log(file_path);
-        var file_thumb_path = "./server/storage/" + file.container + "/thumb/" + file.name;*/
 
-        /*qt.convert({
-            src: file_path,
-            dst: file_thumb_path,
-            width: 100
-        }, function (err, path) {
-           
-        });*/
-        next();
-       
-    });
+    // file wants to be renamed
+    if (newName) {
+
+      // create new name with old ext
+      //let ext = name.split('.').slice(-1).pop();
+      //let newFullName = `${newName}.${ext}`;
+      let newFullName = (new Date()).getTime() + "_" + newName + "_" + oldname;
+
+      // pipe old file as new one with new name
+      let dlStream = Storage.downloadStream(container, oldname);
+      let ulStream = Storage.uploadStream(container, newFullName);
+      dlStream.pipe(ulStream);
+      ulStream.on('finish', () => {
+        Storage.removeFile(container, oldname, (err) => {
+          next();
+        });
+      });
+    }
+    else next();
+
+  });
 
 };

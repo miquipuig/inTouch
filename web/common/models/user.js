@@ -61,33 +61,33 @@ module.exports = function(user) {
   user.getExample = function(password, cb) {
 
     user.create([{
-      nombre: "Angela",
-      apellido: "Food",
-      telefono: "+34 956854745",
-      intereses: ["guitar", "tennis"],
-      identificacion: "123456789A",
-      direccion: "Calle Bilbao, 3 Barcelona",
+      name: "Angela",
+      surname: "Food",
+      telephone: "+34 956854745",
+      interests: ["guitar", "tennis"],
+      idDocument: "123456789A",
+      address: "Calle Bilbao, 3 Barcelona",
       username: 'foo',
       email: 'foo@bar.com',
       password: password
     }, {
 
-      nombre: "John",
-      apellido: "Mayer",
-      telefono: "+34 956854745",
-      intereses: ["it", "running"],
-      identificacion: "999999999J",
-      direccion: "Calle Paris, 255 Barcelona",
+      name: "John",
+      surname: "Mayer",
+      telephone: "+34 956854745",
+      interests: ["it", "running"],
+      idDocument: "999999999J",
+      address: "Calle Paris, 255 Barcelona",
       username: 'john',
       email: 'john@doe.com',
       password: password
     }, {
-      nombre: "Jane",
-      apellido: "Foster",
-      telefono: "+34 956854745",
-      intereses: ["cooking", "singing"],
-      identificacion: "123456789A",
-      direccion: "Calle Balmes, num 666 Barcelona",
+      name: "Jane",
+      surname: "Foster",
+      telephone: "+34 956854745",
+      interests: ["cooking", "singing"],
+      idDocument: "123456789A",
+      address: "Calle Balmes, num 666 Barcelona",
       username: 'jane',
       email: 'jane@doe.com',
       password: password

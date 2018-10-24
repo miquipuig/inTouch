@@ -21,7 +21,8 @@ app.start = function() {
   });
 };
 
-//Autentificació de sockets
+//-----------------------------------------------------------
+//SOCKETS
 //-----------------------------------------------------------
 if (require.main === module) {
   //Comment this app.start line and add following lines
@@ -81,7 +82,8 @@ if (require.main === module) {
   });
 }
 //-----------------------------------------------------------
-//Fin de la Autentificación de sockets
+//Fin de sockets
+//-----------------------------------------------------------
 
 
 //multiple nodes

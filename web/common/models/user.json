@@ -4,24 +4,24 @@
   "strict": true,
   "idInjection": true,
   "properties": {
-    "nombre": {
+    "name": {
       "type": "string"
     },
-    "apellido": {
+    "surname": {
       "type": "string"
     },
-    "telefono": {
+    "telephone": {
       "type": "string"
     },
-    "intereses": {
+    "interests": {
       "type": [
         "string"
       ]
     },
-    "direccion": {
+    "address": {
       "type": "string"
     },
-    "identificacion": {
+    "idDocument": {
       "type": "string"
     },
     "trainer": {
